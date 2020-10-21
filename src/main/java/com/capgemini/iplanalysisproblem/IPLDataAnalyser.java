@@ -97,6 +97,7 @@ public class IPLDataAnalyser<E> {
 		return Double.parseDouble(avg);
 
 	}
+
 	public double TopStrikingRate(String filePath) throws IOException {
 		CsvToBean<IPLBowlingData> csvToBeanBuilder = (CsvToBean<IPLBowlingData>) getBean(filePath,
 				IPLBowlingData.class);
@@ -113,5 +114,14 @@ public class IPLDataAnalyser<E> {
 		return csvToBeanBuilder;
 
 	}
+	public double TopEconomy(String filePath) throws IOException {
+		CsvToBean<IPLBowlingData> csvToBeanBuilder = (CsvToBean<IPLBowlingData>) getBean(filePath,
+				IPLBowlingData.class);
+		Double economy = csvToBeanBuilder.parse().stream().map(l -> l.econ)
+				.max((l1, l2) -> 1 + (int) ((l2) - (l1))).get();
+		return (economy);
+	}
+
+	
 
 }

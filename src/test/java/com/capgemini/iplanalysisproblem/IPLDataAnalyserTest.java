@@ -152,7 +152,21 @@ public class IPLDataAnalyserTest {
 	public void iFTopStrikeRateForBowler() {
 		try {
 			try {
-				Assert.assertEquals(8.6, (ipldataAnalyser).TopStrikingRate(filePath2), 0.01);
+				Assert.assertEquals(8.66, (ipldataAnalyser).TopStrikingRate(filePath2), 0.01);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	@Test
+	public void iFTopEconomy() {
+		try {
+			try {
+				Assert.assertEquals(6.69, (ipldataAnalyser).TopEconomy(filePath2), 0.01);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
