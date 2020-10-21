@@ -47,5 +47,34 @@ public class IPLDataAnalyserTest {
 			e.printStackTrace();
 		}
 	}
+	@Test
+	public void iFSixesHighestReturnTrue() {
 
+		try {
+			try {
+				Assert.assertEquals(52, (ipldataAnalyser).HighestSixes(filePath), 0.01);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	@Test
+	public void iFFoursHighestReturnTrue() {
+
+		try {
+			try {
+				Assert.assertEquals(64, (ipldataAnalyser).HighestFours(filePath), 0.01);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

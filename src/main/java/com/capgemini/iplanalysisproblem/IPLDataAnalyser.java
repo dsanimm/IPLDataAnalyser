@@ -34,5 +34,23 @@ public class IPLDataAnalyser<E> {
 		return (strikeRate);
 
 	}
+	public double HighestSixes(String filePath) throws IOException {
+		Reader reader = Files.newBufferedReader(Paths.get(filePath));
+		CsvToBean<IPLBattingData> csvToBeanBuilder = new CsvToBeanBuilder<IPLBattingData>(reader)
+				.withType(IPLBattingData.class).withIgnoreLeadingWhiteSpace(true).build();
+		Integer sixes = csvToBeanBuilder.parse().stream().map(l -> l.sixes)
+				.max((l1, l2) -> 1 + (int) ((l1) - (l2))).get();
+		return (sixes);
+
+	}
+	public double HighestFours(String filePath) throws IOException {
+		Reader reader = Files.newBufferedReader(Paths.get(filePath));
+		CsvToBean<IPLBattingData> csvToBeanBuilder = new CsvToBeanBuilder<IPLBattingData>(reader)
+				.withType(IPLBattingData.class).withIgnoreLeadingWhiteSpace(true).build();
+		Integer fours = csvToBeanBuilder.parse().stream().map(l -> l.fours)
+				.max((l1, l2) -> 1 + (int) ((l1) - (l2))).get();
+		return (fours);
+
+	}
 
 }
