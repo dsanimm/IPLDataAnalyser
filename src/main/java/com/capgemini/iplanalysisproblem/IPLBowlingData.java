@@ -18,17 +18,17 @@ public class IPLBowlingData {
 	@CsvBindByName(column = "Wkts")
 	int wkts;
 	@CsvBindByName(column = "BBI")
-	String bbi;
+	int bbi;
 	@CsvBindByName(column = "Avg")
-	int avg;
+	String avg;
 	@CsvBindByName(column = "Econ")
 	double econ;
 	@CsvBindByName(column = "Sr")
-	double sr;
+	String sr;
 	@CsvBindByName(column = "4w")
-	double fourW;
+	int fourW;
 	@CsvBindByName(column = "5w")
-	double fiveW;
+	int fiveW;
 	@Override
 	public String toString() {
 		return "IPLBowlingData [position=" + position + ", player=" + player + ", match=" + match + ", innings="

@@ -11,6 +11,8 @@ import org.junit.Test;
 public class IPLDataAnalyserTest {
 	IPLDataAnalyser ipldataAnalyser;
 	String filePath = "C:/Users/Deepanshu Singh/eclipse-workspace/JavaPractice/WP DP Data_01 IPL2019FactsheetMostRuns.csv";
+	String filePath2 = "C:/Users/Deepanshu Singh/eclipse-workspace/JavaPractice/WP DP Data_02 IPL2019FactsheetMostWkts.csv";
+
 
 	@Before
 	public void setUp() {
@@ -136,7 +138,7 @@ public class IPLDataAnalyserTest {
 	public void iFTopBowlingAverage() {
 		try {
 			try {
-				Assert.assertEquals(2.25, (ipldataAnalyser).TopBowlingAverage(filePath), 0.01);
+				Assert.assertEquals(11.0, (ipldataAnalyser).TopBowlingAverage(filePath2), 0.01);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

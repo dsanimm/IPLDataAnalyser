@@ -82,13 +82,14 @@ public class IPLDataAnalyser<E> {
 
 	}
 	public double TopBowlingAverage(String filePath) throws IOException {
-		CsvToBean<IPLBattingData> csvToBeanBuilder = (CsvToBean<IPLBattingData>) getBean(filePath,IPLBattingData.class);
-		String avg = csvToBeanBuilder.parse().stream().filter(l -> !(l.average.equals("-")))
-				.map(l -> l.average.toString())
+		CsvToBean<IPLBowlingData> csvToBeanBuilder = (CsvToBean<IPLBowlingData>) getBean(filePath,IPLBowlingData.class);
+		String avg = csvToBeanBuilder.parse().stream().filter(l -> !(l.avg.equals("-")))
+				.map(l -> l.avg.toString())
 				.max((l1, l2) -> 1 + (int) (Double.parseDouble(l2) - Double.parseDouble(l1))).get();
 		return Double.parseDouble(avg);
 
 	}
+	
 	public CsvToBean<E> getBean(String Filepath,Class csvClass) throws IOException {
 		Reader reader = Files.newBufferedReader(Paths.get(Filepath));
 		CsvToBean<E> csvToBeanBuilder = new CsvToBeanBuilder<E>(reader)
