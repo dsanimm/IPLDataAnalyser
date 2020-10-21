@@ -18,9 +18,20 @@ public class IPLDataAnalyser<E> {
 		Reader reader = Files.newBufferedReader(Paths.get(filePath));
 		CsvToBean<IPLBattingData> csvToBeanBuilder = new CsvToBeanBuilder<IPLBattingData>(reader)
 				.withType(IPLBattingData.class).withIgnoreLeadingWhiteSpace(true).build();
-		String avg = csvToBeanBuilder.parse().stream().filter(l->!(l.average.equals("-"))).map(l -> l.average.toString())
+		String avg = csvToBeanBuilder.parse().stream().filter(l -> !(l.average.equals("-")))
+				.map(l -> l.average.toString())
 				.max((l1, l2) -> 1 + (int) (Double.parseDouble(l1) - Double.parseDouble(l2))).get();
 		return Double.parseDouble(avg);
+
+	}
+
+	public double TopStrikeRate(String filePath) throws IOException {
+		Reader reader = Files.newBufferedReader(Paths.get(filePath));
+		CsvToBean<IPLBattingData> csvToBeanBuilder = new CsvToBeanBuilder<IPLBattingData>(reader)
+				.withType(IPLBattingData.class).withIgnoreLeadingWhiteSpace(true).build();
+		Double strikeRate = csvToBeanBuilder.parse().stream().map(l -> l.strikeRate)
+				.max((l1, l2) -> 1 + (int) ((l1) - (l2))).get();
+		return (strikeRate);
 
 	}
 
