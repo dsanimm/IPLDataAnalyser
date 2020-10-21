@@ -3,33 +3,40 @@ package com.capgemini.iplanalysisproblem;
 import com.opencsv.bean.CsvBindByName;
 
 public class IPLBattingData {
-	@CsvBindByName(column = "POS", required = true)
-	public int POS;
-	@CsvBindByName(column = "Player", required = true)
-	public String PLAYER;
-	@CsvBindByName(column = "Mat", required = true)
-	public int Mat;
-	@CsvBindByName(column = "Inns", required = true)
-	public int Inns;
-	@CsvBindByName(column = "NO", required = true)
-	public int NO;
-	@CsvBindByName(column = "Runs", required = true)
-	public int Runs;
-	@CsvBindByName(column = "HS", required = true)
-	public int HS;
-	@CsvBindByName(column = "Avg", required = true)
-	public int Avg;
-	@CsvBindByName(column = "BF", required = true)
-	public int BF;
-	@CsvBindByName(column = "SR", required = true)
-	public int SR;
-	@CsvBindByName(column = "100", required = true)
-	public int centuries;
-	@CsvBindByName(column = "50", required = true)
-	public int halfCenturies;
-	@CsvBindByName(column = "4s", required = true)
-	public int fours;
-	@CsvBindByName(column = "6s", required = true)
-	public int sixes;
+	@CsvBindByName(column = "POS")
+	int position;
+	@CsvBindByName(column = "PLAYER")
+	String player;
+	@CsvBindByName(column = "MAT")
+	int match;
+	@CsvBindByName(column = "Inns")
+	int innings;
+	@CsvBindByName(column = "NO")
+	int notOut;
+	@CsvBindByName(column = "Runs")
+	int runs;
+	@CsvBindByName(column = "HS")
+	String highestScore;
+	@CsvBindByName(column = "Avg")
+	String average;
+	@CsvBindByName(column = "BF")
+	int ballFaced;
+	@CsvBindByName(column = "SR")
+	double strikeRate;
+	@CsvBindByName(column = "100")
+	int century;
+	@CsvBindByName(column = "50")
+	int halfCentury;
+	@CsvBindByName(column = "4s")
+	int fours;
+	@CsvBindByName(column = "6s")
+	int sixes;
 
+	@Override
+	public String toString() {
+		return "IPLBatting [position=" + position + ", player=" + player + ", match=" + match + ", innings=" + innings
+				+ ", notOut=" + notOut + ", runs=" + runs + ", highestScore=" + highestScore + ", average=" + average
+				+ ", ballFaced=" + ballFaced + ", strikeRate=" + strikeRate + ", century=" + century + ", halfCentury="
+				+ halfCentury + ", fours=" + fours + ", sixes=" + sixes + "]";
+	}
 }
