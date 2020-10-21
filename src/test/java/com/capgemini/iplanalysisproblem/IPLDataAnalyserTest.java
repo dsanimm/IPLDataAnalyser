@@ -148,4 +148,18 @@ public class IPLDataAnalyserTest {
 			e.printStackTrace();
 		}
 	}
+	@Test
+	public void iFTopStrikeRateForBowler() {
+		try {
+			try {
+				Assert.assertEquals(8.6, (ipldataAnalyser).TopStrikingRate(filePath2), 0.01);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
