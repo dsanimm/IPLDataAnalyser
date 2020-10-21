@@ -125,6 +125,16 @@ public class IPLDataAnalyser<E> {
 		return (topstrikeratew5ww4w);
 	}
 
+	public List<IPLBowlingData> TopWicketswAverage(String filePath) throws IOException {
+		CsvToBean<IPLBowlingData> csvToBeanBuilder = (CsvToBean<IPLBowlingData>) getBean(filePath,
+				IPLBowlingData.class);
+		List<IPLBowlingData> topstrikeratew5ww4w = csvToBeanBuilder.parse().stream()
+				.sorted((l1, l2) -> 1 + (int) ((l2.wkts) - (l1.wkts))).limit(10).filter(l -> !(l.sr.equals("-")))
+				.sorted((l1, l2) -> 1 + (int) (Double.parseDouble(l1.avg) - Double.parseDouble(l2.avg))).limit(5)
+				.collect(Collectors.toList());
+		return (topstrikeratew5ww4w);
+	}
+
 	public CsvToBean<E> getBean(String Filepath, Class csvClass) throws IOException {
 		Reader reader = Files.newBufferedReader(Paths.get(Filepath));
 		CsvToBean<E> csvToBeanBuilder = new CsvToBeanBuilder<E>(reader).withType(csvClass)

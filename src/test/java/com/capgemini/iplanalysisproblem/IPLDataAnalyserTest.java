@@ -192,4 +192,18 @@ public class IPLDataAnalyserTest {
 			e.printStackTrace();
 		}
 	}
+	@Test
+	public void iFTopWicketswAverage() {
+		try {
+			try {
+				(ipldataAnalyser).TopWicketswAverage(filePath2).forEach(System.out::println);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
