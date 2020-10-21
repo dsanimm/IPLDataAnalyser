@@ -32,6 +32,7 @@ public class IPLDataAnalyserTest {
 			e.printStackTrace();
 		}
 	}
+
 	@Test
 	public void iFStrikeRateHighestReturnTrue() {
 
@@ -47,6 +48,7 @@ public class IPLDataAnalyserTest {
 			e.printStackTrace();
 		}
 	}
+
 	@Test
 	public void iFSixesHighestReturnTrue() {
 
@@ -62,6 +64,7 @@ public class IPLDataAnalyserTest {
 			e.printStackTrace();
 		}
 	}
+
 	@Test
 	public void iFFoursHighestReturnTrue() {
 
@@ -77,12 +80,14 @@ public class IPLDataAnalyserTest {
 			e.printStackTrace();
 		}
 	}
+
 	@Test
 	public void iFBestStrikeRatewSixesFours() {
 
 		try {
 			try {
-				(ipldataAnalyser).BestStrikeRatewSixesFours(filePath).forEach(System.out::println);;
+				(ipldataAnalyser).BestStrikeRatewSixesFours(filePath).forEach(System.out::println);
+				;
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -92,12 +97,14 @@ public class IPLDataAnalyserTest {
 			e.printStackTrace();
 		}
 	}
+
 	@Test
 	public void iFBestStrikeRatewAverage() {
 
 		try {
 			try {
-				(ipldataAnalyser).BestStrikeRatewAverage(filePath).forEach(System.out::println);;
+				(ipldataAnalyser).BestStrikeRatewAverage(filePath).forEach(System.out::println);
+				;
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -107,12 +114,29 @@ public class IPLDataAnalyserTest {
 			e.printStackTrace();
 		}
 	}
+
 	@Test
 	public void iFBestAveragewStrikeRate() {
 
 		try {
 			try {
-				(ipldataAnalyser).BestAveragewStrikeRate(filePath).forEach(System.out::println);;
+				(ipldataAnalyser).BestAveragewStrikeRate(filePath).forEach(System.out::println);
+				;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void iFTopBowlingAverage() {
+		try {
+			try {
+				Assert.assertEquals(2.25, (ipldataAnalyser).TopBowlingAverage(filePath), 0.01);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

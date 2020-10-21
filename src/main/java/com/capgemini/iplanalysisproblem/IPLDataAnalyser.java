@@ -17,7 +17,7 @@ import com.opencsv.bean.CsvToBeanBuilder;
 public class IPLDataAnalyser<E> {
 
 	public double TopBattingAverage(String filePath) throws IOException {
-		CsvToBean<IPLBattingData> csvToBeanBuilder = getBean(filePath);
+		CsvToBean<IPLBattingData> csvToBeanBuilder = (CsvToBean<IPLBattingData>) getBean(filePath,IPLBattingData.class);
 		String avg = csvToBeanBuilder.parse().stream().filter(l -> !(l.average.equals("-")))
 				.map(l -> l.average.toString())
 				.max((l1, l2) -> 1 + (int) (Double.parseDouble(l1) - Double.parseDouble(l2))).get();
@@ -26,7 +26,7 @@ public class IPLDataAnalyser<E> {
 	}
 
 	public double TopStrikeRate(String filePath) throws IOException {
-		CsvToBean<IPLBattingData> csvToBeanBuilder = getBean(filePath);
+		CsvToBean<IPLBattingData> csvToBeanBuilder = (CsvToBean<IPLBattingData>) getBean(filePath,IPLBattingData.class);
 		Double strikeRate = csvToBeanBuilder.parse().stream().map(l -> l.strikeRate)
 				.max((l1, l2) -> 1 + (int) ((l1) - (l2))).get();
 		return (strikeRate);
@@ -34,7 +34,7 @@ public class IPLDataAnalyser<E> {
 	}
 
 	public double HighestSixes(String filePath) throws IOException {
-		CsvToBean<IPLBattingData> csvToBeanBuilder = getBean(filePath);
+		CsvToBean<IPLBattingData> csvToBeanBuilder = (CsvToBean<IPLBattingData>) getBean(filePath,IPLBattingData.class);
 		Integer sixes = csvToBeanBuilder.parse().stream().map(l -> l.sixes).max((l1, l2) -> 1 + (int) ((l1) - (l2)))
 				.get();
 		return (sixes);
@@ -42,7 +42,7 @@ public class IPLDataAnalyser<E> {
 	}
 
 	public double HighestFours(String filePath) throws IOException {
-		CsvToBean<IPLBattingData> csvToBeanBuilder = getBean(filePath);
+		CsvToBean<IPLBattingData> csvToBeanBuilder = (CsvToBean<IPLBattingData>) getBean(filePath,IPLBattingData.class);
 		Integer fours = csvToBeanBuilder.parse().stream().map(l -> l.fours).max((l1, l2) -> 1 + (int) ((l1) - (l2)))
 				.get();
 		return (fours);
@@ -50,7 +50,7 @@ public class IPLDataAnalyser<E> {
 	}
 
 	public List<IPLBattingData> BestStrikeRatewSixesFours(String filePath) throws IOException {
-		CsvToBean<IPLBattingData> csvToBeanBuilder = getBean(filePath);
+		CsvToBean<IPLBattingData> csvToBeanBuilder = (CsvToBean<IPLBattingData>) getBean(filePath,IPLBattingData.class);
 		List<IPLBattingData> bestStrikeRatewSixesFours = csvToBeanBuilder.parse().stream()
 				.sorted((l1, l2) -> 1 + (int) ((l2.fours) - (l1.fours))).limit(20)
 				.sorted((l1, l2) -> 1 + (int) ((l2.sixes) - (l1.sixes))).limit(10)
@@ -61,7 +61,7 @@ public class IPLDataAnalyser<E> {
 	}
 
 	public List<IPLBattingData> BestStrikeRatewAverage(String filePath) throws IOException {
-		CsvToBean<IPLBattingData> csvToBeanBuilder = getBean(filePath);
+		CsvToBean<IPLBattingData> csvToBeanBuilder = (CsvToBean<IPLBattingData>) getBean(filePath,IPLBattingData.class);
 		List<IPLBattingData> bestStrikeRatewAverage = csvToBeanBuilder.parse().stream()
 				.sorted((l1, l2) -> 1 + (int) ((l2.strikeRate) - (l1.strikeRate))).limit(10)
 				.filter(l -> !(l.average.equals("-")))
@@ -72,7 +72,7 @@ public class IPLDataAnalyser<E> {
 	}
 
 	public List<IPLBattingData> BestAveragewStrikeRate(String filePath) throws IOException {
-		CsvToBean<IPLBattingData> csvToBeanBuilder = getBean(filePath);
+		CsvToBean<IPLBattingData> csvToBeanBuilder = (CsvToBean<IPLBattingData>) getBean(filePath,IPLBattingData.class);
 		List<IPLBattingData> bestStrikeRatewAverage = csvToBeanBuilder.parse().stream()
 				.filter(l -> !(l.average.equals("-")))
 				.sorted((l1, l2) -> 1 + (int) (Double.parseDouble(l2.average) - Double.parseDouble(l1.average)))
@@ -81,11 +81,18 @@ public class IPLDataAnalyser<E> {
 		return (bestStrikeRatewAverage);
 
 	}
+	public double TopBowlingAverage(String filePath) throws IOException {
+		CsvToBean<IPLBattingData> csvToBeanBuilder = (CsvToBean<IPLBattingData>) getBean(filePath,IPLBattingData.class);
+		String avg = csvToBeanBuilder.parse().stream().filter(l -> !(l.average.equals("-")))
+				.map(l -> l.average.toString())
+				.max((l1, l2) -> 1 + (int) (Double.parseDouble(l2) - Double.parseDouble(l1))).get();
+		return Double.parseDouble(avg);
 
-	public CsvToBean getBean(String Filepath) throws IOException {
+	}
+	public CsvToBean<E> getBean(String Filepath,Class csvClass) throws IOException {
 		Reader reader = Files.newBufferedReader(Paths.get(Filepath));
-		CsvToBean<IPLBattingData> csvToBeanBuilder = new CsvToBeanBuilder<IPLBattingData>(reader)
-				.withType(IPLBattingData.class).withIgnoreLeadingWhiteSpace(true).build();
+		CsvToBean<E> csvToBeanBuilder = new CsvToBeanBuilder<E>(reader)
+				.withType(csvClass).withIgnoreLeadingWhiteSpace(true).build();
 		return csvToBeanBuilder;
 
 	}
