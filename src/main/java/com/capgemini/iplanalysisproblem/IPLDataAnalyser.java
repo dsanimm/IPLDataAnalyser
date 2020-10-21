@@ -107,6 +107,24 @@ public class IPLDataAnalyser<E> {
 
 	}
 
+	public double TopEconomy(String filePath) throws IOException {
+		CsvToBean<IPLBowlingData> csvToBeanBuilder = (CsvToBean<IPLBowlingData>) getBean(filePath,
+				IPLBowlingData.class);
+		Double economy = csvToBeanBuilder.parse().stream().map(l -> l.econ).max((l1, l2) -> 1 + (int) ((l2) - (l1)))
+				.get();
+		return (economy);
+	}
+
+	public List<IPLBowlingData> TopStrikeRatew5Ww4W(String filePath) throws IOException {
+		CsvToBean<IPLBowlingData> csvToBeanBuilder = (CsvToBean<IPLBowlingData>) getBean(filePath,
+				IPLBowlingData.class);
+		List<IPLBowlingData> topstrikeratew5ww4w = csvToBeanBuilder.parse().stream().filter(l -> !(l.sr.equals("-")))
+				.sorted((l1, l2) -> 1 + (int) (Double.parseDouble(l1.sr) - Double.parseDouble(l2.sr))).limit(20)
+				.sorted((l1, l2) -> 1 + (int) ((l2.fourW) - (l1.fourW))).limit(10)
+				.sorted((l1, l2) -> 1 + (int) ((l2.fiveW) - (l1.fiveW))).limit(5).collect(Collectors.toList());
+		return (topstrikeratew5ww4w);
+	}
+
 	public CsvToBean<E> getBean(String Filepath, Class csvClass) throws IOException {
 		Reader reader = Files.newBufferedReader(Paths.get(Filepath));
 		CsvToBean<E> csvToBeanBuilder = new CsvToBeanBuilder<E>(reader).withType(csvClass)
@@ -114,14 +132,5 @@ public class IPLDataAnalyser<E> {
 		return csvToBeanBuilder;
 
 	}
-	public double TopEconomy(String filePath) throws IOException {
-		CsvToBean<IPLBowlingData> csvToBeanBuilder = (CsvToBean<IPLBowlingData>) getBean(filePath,
-				IPLBowlingData.class);
-		Double economy = csvToBeanBuilder.parse().stream().map(l -> l.econ)
-				.max((l1, l2) -> 1 + (int) ((l2) - (l1))).get();
-		return (economy);
-	}
-
-	
 
 }

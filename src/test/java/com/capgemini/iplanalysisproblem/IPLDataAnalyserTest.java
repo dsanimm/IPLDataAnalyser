@@ -13,7 +13,6 @@ public class IPLDataAnalyserTest {
 	String filePath = "C:/Users/Deepanshu Singh/eclipse-workspace/JavaPractice/WP DP Data_01 IPL2019FactsheetMostRuns.csv";
 	String filePath2 = "C:/Users/Deepanshu Singh/eclipse-workspace/JavaPractice/WP DP Data_02 IPL2019FactsheetMostWkts.csv";
 
-
 	@Before
 	public void setUp() {
 		ipldataAnalyser = new IPLDataAnalyser();
@@ -88,8 +87,8 @@ public class IPLDataAnalyserTest {
 
 		try {
 			try {
-				(ipldataAnalyser).BestStrikeRatewSixesFours(filePath).forEach(System.out::println);
-				;
+				// (ipldataAnalyser).BestStrikeRatewSixesFours(filePath).forEach(System.out::println);
+
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -105,8 +104,8 @@ public class IPLDataAnalyserTest {
 
 		try {
 			try {
-				(ipldataAnalyser).BestStrikeRatewAverage(filePath).forEach(System.out::println);
-				;
+				// (ipldataAnalyser).BestStrikeRatewAverage(filePath).forEach(System.out::println);
+
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -122,7 +121,7 @@ public class IPLDataAnalyserTest {
 
 		try {
 			try {
-				(ipldataAnalyser).BestAveragewStrikeRate(filePath).forEach(System.out::println);
+				// (ipldataAnalyser).BestAveragewStrikeRate(filePath).forEach(System.out::println);
 				;
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -148,6 +147,7 @@ public class IPLDataAnalyserTest {
 			e.printStackTrace();
 		}
 	}
+
 	@Test
 	public void iFTopStrikeRateForBowler() {
 		try {
@@ -162,11 +162,27 @@ public class IPLDataAnalyserTest {
 			e.printStackTrace();
 		}
 	}
+
 	@Test
 	public void iFTopEconomy() {
 		try {
 			try {
 				Assert.assertEquals(6.69, (ipldataAnalyser).TopEconomy(filePath2), 0.01);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void iFTopStrikeRatew5Ww4W() {
+		try {
+			try {
+				(ipldataAnalyser).TopStrikeRatew5Ww4W(filePath2).forEach(System.out::println);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
