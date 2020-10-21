@@ -51,11 +51,34 @@ public class IPLDataAnalyser<E> {
 
 	public List<IPLBattingData> BestStrikeRatewSixesFours(String filePath) throws IOException {
 		CsvToBean<IPLBattingData> csvToBeanBuilder = getBean(filePath);
-		List<IPLBattingData> fours = csvToBeanBuilder.parse().stream()
+		List<IPLBattingData> bestStrikeRatewSixesFours = csvToBeanBuilder.parse().stream()
 				.sorted((l1, l2) -> 1 + (int) ((l2.fours) - (l1.fours))).limit(20)
 				.sorted((l1, l2) -> 1 + (int) ((l2.sixes) - (l1.sixes))).limit(10)
-				.sorted((l1, l2) -> 1 + (int) ((l2.strikeRate) - (l1.strikeRate))).limit(5).collect(Collectors.toList());
-		return (fours);
+				.sorted((l1, l2) -> 1 + (int) ((l2.strikeRate) - (l1.strikeRate))).limit(5)
+				.collect(Collectors.toList());
+		return (bestStrikeRatewSixesFours);
+
+	}
+
+	public List<IPLBattingData> BestStrikeRatewAverage(String filePath) throws IOException {
+		CsvToBean<IPLBattingData> csvToBeanBuilder = getBean(filePath);
+		List<IPLBattingData> bestStrikeRatewAverage = csvToBeanBuilder.parse().stream()
+				.sorted((l1, l2) -> 1 + (int) ((l2.strikeRate) - (l1.strikeRate))).limit(10)
+				.filter(l -> !(l.average.equals("-")))
+				.sorted((l1, l2) -> 1 + (int) (Double.parseDouble(l2.average) - Double.parseDouble(l1.average)))
+				.limit(5).collect(Collectors.toList());
+		return (bestStrikeRatewAverage);
+
+	}
+
+	public List<IPLBattingData> BestAveragewStrikeRate(String filePath) throws IOException {
+		CsvToBean<IPLBattingData> csvToBeanBuilder = getBean(filePath);
+		List<IPLBattingData> bestStrikeRatewAverage = csvToBeanBuilder.parse().stream()
+				.filter(l -> !(l.average.equals("-")))
+				.sorted((l1, l2) -> 1 + (int) (Double.parseDouble(l2.average) - Double.parseDouble(l1.average)))
+				.sorted((l1, l2) -> 1 + (int) ((l2.strikeRate) - (l1.strikeRate))).limit(10)
+				.limit(5).collect(Collectors.toList());
+		return (bestStrikeRatewAverage);
 
 	}
 

@@ -92,4 +92,34 @@ public class IPLDataAnalyserTest {
 			e.printStackTrace();
 		}
 	}
+	@Test
+	public void iFBestStrikeRatewAverage() {
+
+		try {
+			try {
+				(ipldataAnalyser).BestStrikeRatewAverage(filePath).forEach(System.out::println);;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	@Test
+	public void iFBestAveragewStrikeRate() {
+
+		try {
+			try {
+				(ipldataAnalyser).BestAveragewStrikeRate(filePath).forEach(System.out::println);;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
