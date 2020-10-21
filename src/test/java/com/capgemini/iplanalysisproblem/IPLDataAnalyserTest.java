@@ -77,4 +77,19 @@ public class IPLDataAnalyserTest {
 			e.printStackTrace();
 		}
 	}
+	@Test
+	public void iFBestStrikeRatewSixesFours() {
+
+		try {
+			try {
+				(ipldataAnalyser).BestStrikeRatewSixesFours(filePath).forEach(System.out::println);;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
