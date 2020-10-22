@@ -170,5 +170,15 @@ public class IPLDataAnalyserTest {
 		}
 
 	}
+	@Test
+	public void iFTopRunsWickets() {
 
+		try {
+			(ipldataAnalyser).TopRunsWickets(FILEPATH,FILEPATH2).forEach(System.out::println);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
 }
