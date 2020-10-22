@@ -10,8 +10,8 @@ import org.junit.Test;
 
 public class IPLDataAnalyserTest {
 	IPLDataAnalyser ipldataAnalyser;
-	String filePath = "C:/Users/Deepanshu Singh/eclipse-workspace/JavaPractice/WP DP Data_01 IPL2019FactsheetMostRuns.csv";
-	String filePath2 = "C:/Users/Deepanshu Singh/eclipse-workspace/JavaPractice/WP DP Data_02 IPL2019FactsheetMostWkts.csv";
+	String FILEPATH = "C:/Users/Deepanshu Singh/eclipse-workspace/JavaPractice/WP DP Data_01 IPL2019FactsheetMostRuns.csv";
+	String FILEPATH2 = "C:/Users/Deepanshu Singh/eclipse-workspace/JavaPractice/WP DP Data_02 IPL2019FactsheetMostWkts.csv";
 
 	@Before
 	public void setUp() {
@@ -22,13 +22,8 @@ public class IPLDataAnalyserTest {
 	public void iFAverageHighestReturnTrue() {
 
 		try {
-			try {
-				Assert.assertEquals(83.2, (ipldataAnalyser).TopBattingAverage(filePath), 0.01);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (Exception e) {
+			Assert.assertEquals(83.2, (ipldataAnalyser).TopBattingAverage(FILEPATH), 0.01);
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -38,13 +33,8 @@ public class IPLDataAnalyserTest {
 	public void iFStrikeRateHighestReturnTrue() {
 
 		try {
-			try {
-				Assert.assertEquals(333.33, (ipldataAnalyser).TopStrikeRate(filePath), 0.01);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (Exception e) {
+			Assert.assertEquals(333.33, (ipldataAnalyser).TopStrikeRate(FILEPATH), 0.01);
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -54,13 +44,8 @@ public class IPLDataAnalyserTest {
 	public void iFSixesHighestReturnTrue() {
 
 		try {
-			try {
-				Assert.assertEquals(52, (ipldataAnalyser).HighestSixes(filePath), 0.01);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (Exception e) {
+			Assert.assertEquals(52, (ipldataAnalyser).HighestSixes(FILEPATH), 0.01);
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -70,13 +55,8 @@ public class IPLDataAnalyserTest {
 	public void iFFoursHighestReturnTrue() {
 
 		try {
-			try {
-				Assert.assertEquals(64, (ipldataAnalyser).HighestFours(filePath), 0.01);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (Exception e) {
+			Assert.assertEquals(64, (ipldataAnalyser).HighestFours(FILEPATH), 0.01);
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -86,14 +66,9 @@ public class IPLDataAnalyserTest {
 	public void iFBestStrikeRatewSixesFours() {
 
 		try {
-			try {
-				// (ipldataAnalyser).BestStrikeRatewSixesFours(filePath).forEach(System.out::println);
+			(ipldataAnalyser).BestStrikeRatewSixesFours(FILEPATH).forEach(System.out::println);
 
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (Exception e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -103,107 +78,97 @@ public class IPLDataAnalyserTest {
 	public void iFBestStrikeRatewAverage() {
 
 		try {
-			try {
-				// (ipldataAnalyser).BestStrikeRatewAverage(filePath).forEach(System.out::println);
+			(ipldataAnalyser).BestStrikeRatewAverage(FILEPATH).forEach(System.out::println);
 
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (Exception e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
 
 	@Test
 	public void iFBestAveragewStrikeRate() {
 
 		try {
-			try {
-				// (ipldataAnalyser).BestAveragewStrikeRate(filePath).forEach(System.out::println);
-				;
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (Exception e) {
+			(ipldataAnalyser).BestAveragewStrikeRate(FILEPATH).forEach(System.out::println);
+			;
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
 
 	@Test
 	public void iFTopBowlingAverage() {
+
 		try {
-			try {
-				Assert.assertEquals(11.0, (ipldataAnalyser).TopBowlingAverage(filePath2), 0.01);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (Exception e) {
+			Assert.assertEquals(11.0, (ipldataAnalyser).TopBowlingAverage(FILEPATH2), 0.01);
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
 
 	@Test
 	public void iFTopStrikeRateForBowler() {
+
 		try {
-			try {
-				Assert.assertEquals(8.66, (ipldataAnalyser).TopStrikingRate(filePath2), 0.01);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (Exception e) {
+			Assert.assertEquals(8.66, (ipldataAnalyser).TopStrikingRate(FILEPATH2), 0.01);
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
 
 	@Test
 	public void iFTopEconomy() {
+
 		try {
-			try {
-				Assert.assertEquals(6.69, (ipldataAnalyser).TopEconomy(filePath2), 0.01);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (Exception e) {
+			Assert.assertEquals(6.69, (ipldataAnalyser).TopEconomy(FILEPATH2), 0.01);
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
 
 	@Test
 	public void iFTopStrikeRatew5Ww4W() {
+
 		try {
-			try {
-				(ipldataAnalyser).TopStrikeRatew5Ww4W(filePath2).forEach(System.out::println);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (Exception e) {
+			(ipldataAnalyser).TopStrikeRatew5Ww4W(FILEPATH2).forEach(System.out::println);
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
+
 	@Test
 	public void iFTopWicketswAverage() {
+
 		try {
-			try {
-				(ipldataAnalyser).TopWicketswAverage(filePath2).forEach(System.out::println);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (Exception e) {
+			(ipldataAnalyser).TopWicketswAverage(FILEPATH2).forEach(System.out::println);
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
+	@Test
+	public void iFTopBattingBowlingAverage() {
+
+		try {
+			(ipldataAnalyser).TopBattingBowlingAverage(FILEPATH,FILEPATH2).forEach(System.out::println);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
 }
