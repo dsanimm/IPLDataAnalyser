@@ -181,4 +181,24 @@ public class IPLDataAnalyserTest {
 		}
 
 	}
+	@Test
+	public void iFMaxHundredTopBattingavg() {
+
+		try {
+			(ipldataAnalyser).MaxHundredTopBattingavg(FILEPATH).forEach(System.out::println);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		@Test
+		public void iFZeroHundredFiftywMaxAvg() {
+
+			try {
+				(ipldataAnalyser).ZeroHundredFiftywMaxAvg(FILEPATH).forEach(System.out::println);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+	}
 }

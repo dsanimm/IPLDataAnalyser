@@ -17,8 +17,7 @@ import com.opencsv.bean.CsvToBeanBuilder;
 public class IPLDataAnalyser<E> {
 
 	public double TopBattingAverage(String filePath) throws IOException {
-		CsvToBean<IPLBattingData> csvToBeanBuilder = (CsvToBean<IPLBattingData>) getBean(filePath,
-				IPLBattingData.class);
+		CsvToBean<IPLBatter> csvToBeanBuilder = (CsvToBean<IPLBatter>) getBean(filePath, IPLBatter.class);
 		String avg = csvToBeanBuilder.parse().stream().filter(l -> !(l.average.equals("-")))
 				.map(l -> l.average.toString())
 				.max((l1, l2) -> 1 + (int) (Double.parseDouble(l1) - Double.parseDouble(l2))).get();
@@ -27,8 +26,7 @@ public class IPLDataAnalyser<E> {
 	}
 
 	public double TopStrikeRate(String filePath) throws IOException {
-		CsvToBean<IPLBattingData> csvToBeanBuilder = (CsvToBean<IPLBattingData>) getBean(filePath,
-				IPLBattingData.class);
+		CsvToBean<IPLBatter> csvToBeanBuilder = (CsvToBean<IPLBatter>) getBean(filePath, IPLBatter.class);
 		Double strikeRate = csvToBeanBuilder.parse().stream().map(l -> l.strikeRate)
 				.max((l1, l2) -> 1 + (int) ((l1) - (l2))).get();
 		return (strikeRate);
@@ -36,8 +34,7 @@ public class IPLDataAnalyser<E> {
 	}
 
 	public double HighestSixes(String filePath) throws IOException {
-		CsvToBean<IPLBattingData> csvToBeanBuilder = (CsvToBean<IPLBattingData>) getBean(filePath,
-				IPLBattingData.class);
+		CsvToBean<IPLBatter> csvToBeanBuilder = (CsvToBean<IPLBatter>) getBean(filePath, IPLBatter.class);
 		Integer sixes = csvToBeanBuilder.parse().stream().map(l -> l.sixes).max((l1, l2) -> 1 + (int) ((l1) - (l2)))
 				.get();
 		return (sixes);
@@ -45,94 +42,21 @@ public class IPLDataAnalyser<E> {
 	}
 
 	public double HighestFours(String filePath) throws IOException {
-		CsvToBean<IPLBattingData> csvToBeanBuilder = (CsvToBean<IPLBattingData>) getBean(filePath,
-				IPLBattingData.class);
+		CsvToBean<IPLBatter> csvToBeanBuilder = (CsvToBean<IPLBatter>) getBean(filePath, IPLBatter.class);
 		Integer fours = csvToBeanBuilder.parse().stream().map(l -> l.fours).max((l1, l2) -> 1 + (int) ((l1) - (l2)))
 				.get();
 		return (fours);
 
 	}
 
-	public List<IPLBattingData> BestStrikeRatewSixesFours(String filePath) throws IOException {
-		CsvToBean<IPLBattingData> csvToBeanBuilder = (CsvToBean<IPLBattingData>) getBean(filePath,
-				IPLBattingData.class);
-		List<IPLBattingData> bestStrikeRatewSixesFours = csvToBeanBuilder.parse().stream()
-				.sorted((l1, l2) -> 1 + (int) ((l2.fours) - (l1.fours))).limit(20)
-				.sorted((l1, l2) -> 1 + (int) ((l2.sixes) - (l1.sixes))).limit(10)
-				.sorted((l1, l2) -> 1 + (int) ((l2.strikeRate) - (l1.strikeRate))).limit(5)
-				.collect(Collectors.toList());
+	public List<IPLBatter> BestStrikeRatewSixesFours(String filePath) throws IOException {
+		CsvToBean<IPLBatter> csvToBeanBuilder = (CsvToBean<IPLBatter>) getBean(filePath, IPLBatter.class);
+		List<IPLBatter> bestStrikeRatewSixesFours = csvToBeanBuilder.parse().stream()
+				.sorted((l1, l2) -> 1 + (int) ((l2.strikeRate) - (l1.strikeRate))).limit(20)
+				.sorted((l1, l2) -> 1 + (int) ((l2.fours) - (l1.fours))).limit(10)
+				.sorted((l1, l2) -> 1 + (int) ((l2.sixes) - (l1.sixes))).limit(5).collect(Collectors.toList());
 		return (bestStrikeRatewSixesFours);
 
-	}
-
-	public List<IPLBattingData> BestStrikeRatewAverage(String filePath) throws IOException {
-		CsvToBean<IPLBattingData> csvToBeanBuilder = (CsvToBean<IPLBattingData>) getBean(filePath,
-				IPLBattingData.class);
-		List<IPLBattingData> bestStrikeRatewAverage = csvToBeanBuilder.parse().stream()
-				.sorted((l1, l2) -> 1 + (int) ((l2.strikeRate) - (l1.strikeRate))).limit(10)
-				.filter(l -> !(l.average.equals("-")))
-				.sorted((l1, l2) -> 1 + (int) (Double.parseDouble(l2.average) - Double.parseDouble(l1.average)))
-				.limit(5).collect(Collectors.toList());
-		return (bestStrikeRatewAverage);
-
-	}
-
-	public List<IPLBattingData> BestAveragewStrikeRate(String filePath) throws IOException {
-		CsvToBean<IPLBattingData> csvToBeanBuilder = (CsvToBean<IPLBattingData>) getBean(filePath,
-				IPLBattingData.class);
-		List<IPLBattingData> bestStrikeRatewAverage = csvToBeanBuilder.parse().stream()
-				.filter(l -> !(l.average.equals("-")))
-				.sorted((l1, l2) -> 1 + (int) (Double.parseDouble(l2.average) - Double.parseDouble(l1.average)))
-				.sorted((l1, l2) -> 1 + (int) ((l2.strikeRate) - (l1.strikeRate))).limit(10).limit(5)
-				.collect(Collectors.toList());
-		return (bestStrikeRatewAverage);
-
-	}
-
-	public double TopBowlingAverage(String filePath) throws IOException {
-		CsvToBean<IPLBowlingData> csvToBeanBuilder = (CsvToBean<IPLBowlingData>) getBean(filePath,
-				IPLBowlingData.class);
-		String avg = csvToBeanBuilder.parse().stream().filter(l -> !(l.avg.equals("-"))).map(l -> l.avg.toString())
-				.max((l1, l2) -> 1 + (int) (Double.parseDouble(l2) - Double.parseDouble(l1))).get();
-		return Double.parseDouble(avg);
-
-	}
-
-	public double TopStrikingRate(String filePath) throws IOException {
-		CsvToBean<IPLBowlingData> csvToBeanBuilder = (CsvToBean<IPLBowlingData>) getBean(filePath,
-				IPLBowlingData.class);
-		String sr = csvToBeanBuilder.parse().stream().filter(l -> !(l.avg.equals("-"))).map(l -> l.sr.toString())
-				.max((l1, l2) -> 1 + (int) (Double.parseDouble(l2) - Double.parseDouble(l1))).get();
-		return Double.parseDouble(sr);
-
-	}
-
-	public double TopEconomy(String filePath) throws IOException {
-		CsvToBean<IPLBowlingData> csvToBeanBuilder = (CsvToBean<IPLBowlingData>) getBean(filePath,
-				IPLBowlingData.class);
-		Double economy = csvToBeanBuilder.parse().stream().map(l -> l.econ).max((l1, l2) -> 1 + (int) ((l2) - (l1)))
-				.get();
-		return (economy);
-	}
-
-	public List<IPLBowlingData> TopStrikeRatew5Ww4W(String filePath) throws IOException {
-		CsvToBean<IPLBowlingData> csvToBeanBuilder = (CsvToBean<IPLBowlingData>) getBean(filePath,
-				IPLBowlingData.class);
-		List<IPLBowlingData> topstrikeratew5ww4w = csvToBeanBuilder.parse().stream().filter(l -> !(l.sr.equals("-")))
-				.sorted((l1, l2) -> 1 + (int) (Double.parseDouble(l1.sr) - Double.parseDouble(l2.sr))).limit(20)
-				.sorted((l1, l2) -> 1 + (int) ((l2.fourW) - (l1.fourW))).limit(10)
-				.sorted((l1, l2) -> 1 + (int) ((l2.fiveW) - (l1.fiveW))).limit(5).collect(Collectors.toList());
-		return (topstrikeratew5ww4w);
-	}
-
-	public List<IPLBowlingData> TopWicketswAverage(String filePath) throws IOException {
-		CsvToBean<IPLBowlingData> csvToBeanBuilder = (CsvToBean<IPLBowlingData>) getBean(filePath,
-				IPLBowlingData.class);
-		List<IPLBowlingData> topstrikeratew5ww4w = csvToBeanBuilder.parse().stream()
-				.sorted((l1, l2) -> 1 + (int) ((l2.wkts) - (l1.wkts))).limit(10).filter(l -> !(l.sr.equals("-")))
-				.sorted((l1, l2) -> 1 + (int) (Double.parseDouble(l1.avg) - Double.parseDouble(l2.avg))).limit(5)
-				.collect(Collectors.toList());
-		return (topstrikeratew5ww4w);
 	}
 
 	public CsvToBean<E> getBean(String Filepath, Class csvClass) throws IOException {
@@ -141,6 +65,111 @@ public class IPLDataAnalyser<E> {
 				.withIgnoreLeadingWhiteSpace(true).build();
 		return csvToBeanBuilder;
 
+	}
+
+	public List<IPLBatter> BestStrikeRatewAverage(String filePath) throws IOException {
+		CsvToBean<IPLBatter> csvToBeanBuilder = (CsvToBean<IPLBatter>) getBean(filePath, IPLBatter.class);
+		List<IPLBatter> bestStrikeRatewAverage = csvToBeanBuilder.parse().stream()
+				.sorted((l1, l2) -> 1 + (int) ((l2.strikeRate) - (l1.strikeRate))).limit(10)
+				.filter(l -> !(l.average.equals("-")))
+				.sorted((l1, l2) -> 1 + (int) (Double.parseDouble(l2.average) - Double.parseDouble(l1.average)))
+				.limit(5).collect(Collectors.toList());
+		return (bestStrikeRatewAverage);
+
+	}
+
+	public List<IPLBatter> BestAveragewStrikeRate(String filePath) throws IOException {
+		CsvToBean<IPLBatter> csvToBeanBuilder = (CsvToBean<IPLBatter>) getBean(filePath, IPLBatter.class);
+		List<IPLBatter> bestStrikeRatewAverage = csvToBeanBuilder.parse().stream().filter(l -> !(l.average.equals("-")))
+				.sorted((l1, l2) -> 1 + (int) (Double.parseDouble(l2.average) - Double.parseDouble(l1.average)))
+				.sorted((l1, l2) -> 1 + (int) ((l2.strikeRate) - (l1.strikeRate))).limit(10).limit(5)
+				.collect(Collectors.toList());
+		return (bestStrikeRatewAverage);
+
+	}
+
+	public double TopBowlingAverage(String filePath) throws IOException {
+		CsvToBean<IPLBowler> csvToBeanBuilder = (CsvToBean<IPLBowler>) getBean(filePath, IPLBowler.class);
+		String avg = csvToBeanBuilder.parse().stream().filter(l -> !(l.avg.equals("-"))).map(l -> l.avg.toString())
+				.max((l1, l2) -> 1 + (int) (Double.parseDouble(l2) - Double.parseDouble(l1))).get();
+		return Double.parseDouble(avg);
+
+	}
+
+	public double TopStrikingRate(String filePath) throws IOException {
+		CsvToBean<IPLBowler> csvToBeanBuilder = (CsvToBean<IPLBowler>) getBean(filePath, IPLBowler.class);
+		String sr = csvToBeanBuilder.parse().stream().filter(l -> !(l.avg.equals("-"))).map(l -> l.sr.toString())
+				.max((l1, l2) -> 1 + (int) (Double.parseDouble(l2) - Double.parseDouble(l1))).get();
+		return Double.parseDouble(sr);
+
+	}
+
+	public double TopEconomy(String filePath) throws IOException {
+		CsvToBean<IPLBowler> csvToBeanBuilder = (CsvToBean<IPLBowler>) getBean(filePath, IPLBowler.class);
+		Double economy = csvToBeanBuilder.parse().stream().map(l -> l.econ).max((l1, l2) -> 1 + (int) ((l2) - (l1)))
+				.get();
+		return (economy);
+	}
+
+	public List<IPLBowler> TopStrikeRatew5Ww4W(String filePath) throws IOException {
+		CsvToBean<IPLBowler> csvToBeanBuilder = (CsvToBean<IPLBowler>) getBean(filePath, IPLBowler.class);
+		List<IPLBowler> topstrikeratew5ww4w = csvToBeanBuilder.parse().stream().filter(l -> !(l.sr.equals("-")))
+				.sorted((l1, l2) -> 1 + (int) (Double.parseDouble(l1.sr) - Double.parseDouble(l2.sr))).limit(20)
+				.sorted((l1, l2) -> 1 + (int) ((l2.fourW) - (l1.fourW))).limit(10)
+				.sorted((l1, l2) -> 1 + (int) ((l2.fiveW) - (l1.fiveW))).limit(5).collect(Collectors.toList());
+		return (topstrikeratew5ww4w);
+	}
+
+	public List<IPLBowler> TopWicketswAverage(String filePath) throws IOException {
+		CsvToBean<IPLBowler> csvToBeanBuilder = (CsvToBean<IPLBowler>) getBean(filePath, IPLBowler.class);
+		List<IPLBowler> topstrikeratew5ww4w = csvToBeanBuilder.parse().stream()
+				.sorted((l1, l2) -> 1 + (int) ((l2.wkts) - (l1.wkts))).limit(10).filter(l -> !(l.sr.equals("-")))
+				.sorted((l1, l2) -> 1 + (int) (Double.parseDouble(l1.avg) - Double.parseDouble(l2.avg))).limit(5)
+				.collect(Collectors.toList());
+		return (topstrikeratew5ww4w);
+	}
+
+	public List<String> TopBattingBowlingAverage(String filePath, String filePath2) throws IOException {
+		CsvToBean<IPLBowler> csvToBeanBuilderBowl = (CsvToBean<IPLBowler>) getBean(filePath2, IPLBowler.class);
+		CsvToBean<IPLBatter> csvToBeanBuilderBat = (CsvToBean<IPLBatter>) getBean(filePath, IPLBatter.class);
+		List<String> BowlersNames = csvToBeanBuilderBowl.parse().stream().filter(l -> !(l.avg.equals("-")))
+				.sorted((l1, l2) -> 1 + (int) (Double.parseDouble(l1.avg) - Double.parseDouble(l2.avg)))
+				.map(l -> l.player).collect(Collectors.toList());
+		List<String> BatterNames = csvToBeanBuilderBat.parse().stream().filter(l -> !(l.average.equals("-")))
+				.sorted((l1, l2) -> 1 + (int) (Double.parseDouble(l2.average) - Double.parseDouble(l1.average)))
+				.map(l -> l.player).collect(Collectors.toList());
+		List<String> allRounders = BatterNames.stream().filter(l -> BowlersNames.contains(l)).limit(5)
+				.collect(Collectors.toList());
+		return (allRounders);
+	}
+
+	public List<String> TopRunsWickets(String filePath, String filePath2) throws IOException {
+		CsvToBean<IPLBowler> csvToBeanBuilderBowl = (CsvToBean<IPLBowler>) getBean(filePath2, IPLBowler.class);
+		CsvToBean<IPLBatter> csvToBeanBuilderBat = (CsvToBean<IPLBatter>) getBean(filePath, IPLBatter.class);
+		List<String> BowlersNames = csvToBeanBuilderBowl.parse().stream().filter(l -> !(l.avg.equals("-")))
+				.sorted((l1, l2) -> 1 + (int) ((l1.wkts) - (l2.wkts))).map(l -> l.player).collect(Collectors.toList());
+		List<String> BatterNames = csvToBeanBuilderBat.parse().stream().filter(l -> !(l.average.equals("-")))
+				.sorted((l1, l2) -> 1 + (int) ((l2.runs) - (l1.runs))).map(l -> l.player).collect(Collectors.toList());
+		List<String> topRunsWickets = BatterNames.stream().filter(l -> BowlersNames.contains(l)).limit(5)
+				.collect(Collectors.toList());
+		return (topRunsWickets);
+	}
+
+	public List<IPLBatter> MaxHundredTopBattingavg(String filePath) throws IOException {
+		CsvToBean<IPLBatter> csvToBeanBuilder = (CsvToBean<IPLBatter>) getBean(filePath, IPLBatter.class);
+		List<IPLBatter> maxHundredTopBattingavg = csvToBeanBuilder.parse().stream()
+				.sorted((l1, l2) -> 1 + (int) ((l2.century) - (l1.century))).limit(10).filter(l -> !(l.average.equals("-")))
+				.sorted((l1, l2) -> 1 + (int) (Double.parseDouble(l2.average) - Double.parseDouble(l1.average))).limit(5)
+				.collect(Collectors.toList());
+		return (maxHundredTopBattingavg);
+	}
+	public List<IPLBatter> ZeroHundredFiftywMaxAvg(String filePath) throws IOException {
+		CsvToBean<IPLBatter> csvToBeanBuilder = (CsvToBean<IPLBatter>) getBean(filePath, IPLBatter.class);
+		List<IPLBatter> zeroHundredFiftywMaxAvg = csvToBeanBuilder.parse().stream()
+				.filter(l -> l.century==0).filter(l -> l.halfCentury==0).filter(l -> !(l.average.equals("-")))
+				.sorted((l1, l2) -> 1 + (int) (Double.parseDouble(l2.average) - Double.parseDouble(l1.average))).limit(5)
+				.collect(Collectors.toList());
+		return (zeroHundredFiftywMaxAvg);
 	}
 
 }
